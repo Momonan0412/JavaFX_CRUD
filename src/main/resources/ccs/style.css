@@ -1,0 +1,23 @@
+/* Text Field */
+.text-field:hover {
+    -fx-background-color: lightgray;
+}
+
+/* Password Field */
+.password-field:hover {
+    -fx-background-color: lightgray;
+}
+
+/* Button */
+.button:hover {
+    -fx-background-color: lightgray;
+}
+.rounded-image-view {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-border-color: transparent;
+    -fx-border-width: 10px;
+    -fx-border-style: solid;
+    -fx-clip-path: circle();
+}
