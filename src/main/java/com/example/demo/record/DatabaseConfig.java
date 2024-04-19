@@ -4,15 +4,15 @@ public record DatabaseConfig(
         String jdbcUrl,
         String username,
         String password,
-        String tableName,
+        String[] tableName,
         String MYSQL_JDBC_DRIVER_CLASS
 ){
     private DatabaseConfig() {
         this(
-                "jdbc:mysql://localhost:3306/dbjavafx",
+                "jdbc:mysql://localhost:3306/dbjavacrud",
                 "root",
-                "Chua123",
-                "tbluseraccount",
+                "",
+                new String[]{"tbluseraccount", "tbluserprofile"},
                 "com.mysql.cj.jdbc.Driver"
         );
     }

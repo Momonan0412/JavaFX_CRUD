@@ -12,7 +12,7 @@ import java.io.IOException;
 public class LoginAndRegister extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginAndRegister.class.getResource("Register.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginAndRegister.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
