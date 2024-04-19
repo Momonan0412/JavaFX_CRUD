@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,6 +23,14 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        btn_Login.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(DatabaseUtilities.checkIfDataExistInTable(txtFld_UserName.getText(),txtFld_Password.getText())){
+                    System.out.println("Success!");
+                    SceneUtilities.changeScene(actionEvent,"Display.fxml", "");
+                }
+            }
+        });
     }
 }

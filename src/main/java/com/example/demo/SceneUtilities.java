@@ -1,4 +1,4 @@
-package com.example.demo.utilities;
+package com.example.demo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,15 +11,10 @@ public class SceneUtilities {
     private SceneUtilities() {
     }
     public static void changeScene(ActionEvent event, String fxmlFile, String title){
-        Parent root = null; // Assign root node for the new scene
-        FXMLLoader loader = null;
         try{
-            loader = new FXMLLoader(SceneUtilities.class.getResource(fxmlFile));
-            root = loader.load();
+            FXMLLoader loader = new FXMLLoader(SceneUtilities.class.getResource(fxmlFile));
+            Parent root = loader.load();
             if(root == null) System.out.println("The root is null!");
-        } catch (IOException e) {
-            throw new RuntimeException("Error loading FXML file: " + fxmlFile, e);
-        } finally {
             Scene currentScene = ((Node) event.getSource()).getScene();
 
             Scene newScene = new Scene(root);
@@ -28,9 +23,10 @@ public class SceneUtilities {
             Stage stage = (Stage) currentScene.getWindow();
             stage.setTitle(title);
             stage.setScene(newScene);
-            assert loader != null;
             stage.centerOnScreen();
             stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Error loading FXML file: " + fxmlFile, e);
         }
     }
 }

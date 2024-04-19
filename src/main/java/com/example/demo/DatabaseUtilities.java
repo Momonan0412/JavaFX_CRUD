@@ -1,4 +1,4 @@
-package com.example.demo.utilities;
+package com.example.demo;
 
 import com.example.demo.record.DatabaseConfig;
 
@@ -30,26 +30,26 @@ public class DatabaseUtilities {
                                            String email, String student_id, String prog_languages) {
         String queryOne = "INSERT INTO `dbjavacrud`." + DATABASE_CONFIG.tableName()[0] +" (username, password) VALUES (?, ?)";
         String queryTwo = "INSERT INTO `dbjavacrud`." + DATABASE_CONFIG.tableName()[1] +" (" +
-                "firstname, lastname, gender, email, student_id, prog_languages) VALUES (?, ?, ?, ?, ?, ?)";
-        try (
+                "account_id,firstname, lastname, gender, email, student_id, prog_languages) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (   Connection connection = getConnection();
+                PreparedStatement preparedStatementOne = connection.prepareStatement(queryOne, Statement.RETURN_GENERATED_KEYS);
                 PreparedStatement preparedStatementTwo = prepareStatement(queryTwo);
-                PreparedStatement preparedStatementOne = prepareStatement(queryOne);
             ) {
-
-
-
-            preparedStatementTwo.setString(1, firstname);
-            preparedStatementTwo.setString(2, lastname);
-            preparedStatementTwo.setString(3, gender);
-            preparedStatementTwo.setString(4, email);
-            preparedStatementTwo.setString(5, student_id);
-            preparedStatementTwo.setString(6, prog_languages);
-
             preparedStatementOne.setString(1, username);
             preparedStatementOne.setString(2, password);
-
-            int rowAffectedTwo = preparedStatementOne.executeUpdate();
             int rowAffectedOne = preparedStatementOne.executeUpdate();
+            ResultSet resultSet = preparedStatementOne.getGeneratedKeys();
+            resultSet.next();
+            preparedStatementTwo.setInt(1,  resultSet.getInt(1));
+            preparedStatementTwo.setString(2, firstname);
+            preparedStatementTwo.setString(3, lastname);
+            preparedStatementTwo.setString(4, gender);
+            preparedStatementTwo.setString(5, email);
+            preparedStatementTwo.setString(6, student_id);
+            preparedStatementTwo.setString(7, prog_languages);
+            int rowAffectedTwo = preparedStatementTwo.executeUpdate();
+
+
 
             return (rowAffectedOne > 0 && rowAffectedTwo > 0) ? "Data inserted successfully!" : "Failed to insert data.";
         } catch (SQLException e) {
@@ -59,7 +59,7 @@ public class DatabaseUtilities {
     }
     // Method to check user credentials in the database
     public static Boolean checkIfDataExistInTable(String username, String password) {
-        String query = "SELECT * FROM " + DATABASE_CONFIG.tableName()[0] + " WHERE user_name = ? AND password_hashed = ? RETURNING *";
+        String query = "SELECT * FROM " + DATABASE_CONFIG.tableName()[0] + " WHERE username = ? AND password = ?";
         try (PreparedStatement preparedStatement = prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
@@ -71,7 +71,7 @@ public class DatabaseUtilities {
             return false;
         }
     }
-    public static Boolean deleteDataFromTable(String account_id ) {
+    public static Boolean deleteDataFromTable(String account_id) {
         String query = "DELETE " +
                 "FROM " + DATABASE_CONFIG.tableName()[0] + " " +
                 "JOIN " + DATABASE_CONFIG.tableName()[1] + " ON " +
@@ -116,8 +116,7 @@ public class DatabaseUtilities {
     }
     public static void main(String[] args) {
         createTable();
-        insertDataToTable("Momonan0412", "123",
-                "Avril Nigel", "Chua", "Male", "asd@asd", "22-4869-876", "JAV");
-        /*String username, String password, String firstname, String lastname, String gender, String email, String student_id, String prog_languages*/
+//        insertDataToTable("Momonan0412", "123", "Avril Nigel", "Chua", "Male", "asd@asd", "22-4869-876", "JAV");
+        System.out.println(checkIfDataExistInTable("Momonan0412", "123"));
     }
 }
