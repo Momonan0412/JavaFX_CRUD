@@ -10,7 +10,7 @@ import java.io.IOException;
 public class SceneUtilities {
     private SceneUtilities() {
     }
-    public static void changeScene(ActionEvent event, String fxmlFile, String title){
+    public static void changeScene(ActionEvent event, String fxmlFile){
         try{
             FXMLLoader loader = new FXMLLoader(SceneUtilities.class.getResource(fxmlFile));
             Parent root = loader.load();
@@ -21,7 +21,6 @@ public class SceneUtilities {
             newScene.setFill(Color.TRANSPARENT);
 
             Stage stage = (Stage) currentScene.getWindow();
-            stage.setTitle(title);
             stage.setScene(newScene);
             stage.centerOnScreen();
             stage.show();

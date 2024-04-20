@@ -25,11 +25,17 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         btn_Login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(ActionEvent event) {
                 if(DatabaseUtilities.checkIfDataExistInTable(txtFld_UserName.getText(),txtFld_Password.getText())){
                     System.out.println("Success!");
-                    SceneUtilities.changeScene(actionEvent,"Display.fxml", "");
+                    SceneUtilities.changeScene(event,"Display.fxml");
                 }
+            }
+        });
+        btn_CreateAccount.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SceneUtilities.changeScene(event, "Register.fxml");
             }
         });
     }

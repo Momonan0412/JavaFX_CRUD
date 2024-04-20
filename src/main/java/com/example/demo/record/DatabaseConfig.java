@@ -9,7 +9,7 @@ public record DatabaseConfig(
 ){
     private DatabaseConfig() {
         this(
-                "jdbc:mysql://localhost:3306/dbjavacrud",
+                "jdbc:mysql://localhost:3307/dbjavacrud",
                 "root",
                 "",
                 new String[]{"tbluseraccount", "tbluserprofile"},

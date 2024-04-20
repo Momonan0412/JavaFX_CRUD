@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.record.DatabaseConfig;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
@@ -59,13 +60,20 @@ public class DatabaseUtilities {
     }
     // Method to check user credentials in the database
     public static Boolean checkIfDataExistInTable(String username, String password) {
-        String query = "SELECT * FROM " + DATABASE_CONFIG.tableName()[0] + " WHERE username = ? AND password = ?";
-        try (PreparedStatement preparedStatement = prepareStatement(query)) {
+        String query = "SELECT password FROM " + DATABASE_CONFIG.tableName()[0] + " WHERE username = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
 
-            return preparedStatement.executeQuery().isBeforeFirst();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String hashedPasswordFromDB = resultSet.getString("password");
+                    return BCrypt.checkpw(password, hashedPasswordFromDB);
+                } else {
+                    return false;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -116,7 +124,5 @@ public class DatabaseUtilities {
     }
     public static void main(String[] args) {
         createTable();
-//        insertDataToTable("Momonan0412", "123", "Avril Nigel", "Chua", "Male", "asd@asd", "22-4869-876", "JAV");
-        System.out.println(checkIfDataExistInTable("Momonan0412", "123"));
     }
 }
