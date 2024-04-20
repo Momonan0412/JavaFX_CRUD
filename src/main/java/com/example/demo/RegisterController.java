@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.net.URL;
@@ -39,6 +40,8 @@ public class RegisterController implements Initializable {
     public TextField txtFld_Username;
     @FXML
     public PasswordField txtFld_Password;
+    @FXML
+    public ImageView ImageViewAlert;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

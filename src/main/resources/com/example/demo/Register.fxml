@@ -92,5 +92,10 @@
             <Font name="Book Antiqua" size="27.0" />
          </font>
       </Label>
+      <ImageView fx:id="ImageViewAlert" fitHeight="100.0" fitWidth="200.0" layoutX="400.0" layoutY="-2.0">
+         <image>
+            <Image url="@../../../Please-fill-in-all-required-fields.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
