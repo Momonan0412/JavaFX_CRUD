@@ -21,3 +21,21 @@
     -fx-border-style: solid;
     -fx-clip-path: circle();
 }
+/* Animation for changing color */
+@keyframes colorChange {
+    0% { -fx-fill: skyblue; }
+    50% { -fx-fill: royalblue; }
+    100% { -fx-fill: skyblue; }
+}
+
+/* Apply animation to Label nodes */
+.label {
+    -fx-fill: skyblue;
+    -fx-animation: colorChange 2s infinite alternate;
+}
+
+/* Apply animation to Text nodes */
+.text {
+    -fx-fill: skyblue;
+    -fx-animation: colorChange 2s infinite alternate;
+}
