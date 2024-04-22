@@ -6,6 +6,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.*;
 
 public class DatabaseUtilities {
+    private static int primaryKeyOfTheLoggedInUser;
+    private static String userNameOfTheLoggedInUser;
     private static final DatabaseConfig DATABASE_CONFIG = DatabaseConfig.createWithDefaults();
     private DatabaseUtilities() {
     }
@@ -25,6 +27,33 @@ public class DatabaseUtilities {
     }
     private static PreparedStatement prepareStatement(String query) throws SQLException {
         return getConnection().prepareStatement(query);
+    }
+    public static String[] getDataFromTable() {
+        String query = "SELECT * FROM `dbjavacrud`." + DATABASE_CONFIG.tableName()[1] + " WHERE account_id = ?";
+        try (PreparedStatement preparedStatement = prepareStatement(query)){
+            preparedStatement.setInt(1, DatabaseUtilities.getPrimaryKeyOfTheLoggedInUser());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String gender = resultSet.getString("gender");
+                String email = resultSet.getString("email");
+                String student_id = resultSet.getString("student_id");
+                String prog_languages = resultSet.getString("prog_languages");
+                return new String[]{
+                        firstname,
+                        lastname,
+                        gender,
+                        email,
+                        student_id,
+                        prog_languages
+                };
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     public static String insertDataToTable(String username, String password,
                                            String firstname, String lastname, String gender,
@@ -60,14 +89,15 @@ public class DatabaseUtilities {
     }
     // Method to check user credentials in the database
     public static Boolean checkIfDataExistInTable(String username, String password) {
-        String query = "SELECT password FROM " + DATABASE_CONFIG.tableName()[0] + " WHERE username = ?";
+        String query = "SELECT account_id, password FROM " + DATABASE_CONFIG.tableName()[0] + " WHERE username = ?";
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)){
 
             preparedStatement.setString(1, username);
-
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    setPrimaryKeyOfTheLoggedInUser(resultSet.getInt("account_id"));
+                    setUserNameOfTheLoggedInUser(username);
                     String hashedPasswordFromDB = resultSet.getString("password");
                     return BCrypt.checkpw(password, hashedPasswordFromDB);
                 } else {
@@ -122,6 +152,23 @@ public class DatabaseUtilities {
             throw new RuntimeException(e);
         }
     }
+
+    public static String getUserNameOfTheLoggedInUser() {
+        return userNameOfTheLoggedInUser;
+    }
+
+    public static void setUserNameOfTheLoggedInUser(String userNameOfTheLoggedInUser) {
+        DatabaseUtilities.userNameOfTheLoggedInUser = userNameOfTheLoggedInUser;
+    }
+
+    public static int getPrimaryKeyOfTheLoggedInUser() {
+        return primaryKeyOfTheLoggedInUser;
+    }
+
+    public static void setPrimaryKeyOfTheLoggedInUser(int primaryKeyOfTheLoggedInUser) {
+        DatabaseUtilities.primaryKeyOfTheLoggedInUser = primaryKeyOfTheLoggedInUser;
+    }
+
     public static void main(String[] args) {
         createTable();
     }

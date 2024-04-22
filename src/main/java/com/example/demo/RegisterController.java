@@ -48,8 +48,15 @@ public class RegisterController implements Initializable {
         btn_Register.setDisable(true);
         txtFld_Username.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
         txtFld_Password.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        cBox_Java.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        cBox_C.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        cBox_CPlusPlus.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        txtFld_LastName.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        txtFld_FirstName.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
         rBtn_Female.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
         rBtn_Others.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        rBtn_Male.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+
         btn_AccountExistProceedToLoginScene.setOnAction(event -> SceneUtilities.changeScene(event, "Login.fxml"));
         btn_Register.setOnAction(new EventHandler<ActionEvent>() {
             @Override

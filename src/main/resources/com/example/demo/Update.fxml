@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane prefHeight="400.0" prefWidth="105.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UpdateController">
+    <children>
+        <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #87CDEE; -fx-background-radius: 50px;">
+            <children>
+                <VBox layoutX="32.0" layoutY="28.0" prefHeight="544.0" prefWidth="536.0" spacing="10.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="320.0" text="Username">
+                            <font>
+                                <Font name="Verdana Bold" size="20.0" />
+                            </font>
+                        </Label>
+                  <TextField />
+                        <Label prefHeight="17.0" prefWidth="320.0" text="Old Password">
+                            <font>
+                                <Font name="Verdana Bold" size="20.0" />
+                            </font>
+                        </Label>
+                  <TextField />
+                        <Label prefHeight="17.0" prefWidth="320.0" text="New Password">
+                            <font>
+                                <Font name="Verdana Bold" size="20.0" />
+                            </font>
+                        </Label>
+                  <TextField />
+                  <Label prefHeight="17.0" prefWidth="320.0" text="Re-enter New Password">
+                     <font>
+                        <Font name="Verdana Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <ImageView fitHeight="600.0" fitWidth="600.0" opacity="0.2">
+            <image>
+                <Image url="@../../../Bubbles.gif" />
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="270.0" layoutY="511.0" prefHeight="37.0" prefWidth="120.0" />
+        <Button layoutX="390.0" layoutY="611.0" mnemonicParsing="false" text="Update!">
+            <font>
+                <Font name="Forte" size="20.0" />
+            </font>
+        </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="475.0" layoutY="513.0">
+         <image>
+            <Image url="@../../../FurinaShock.gif" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

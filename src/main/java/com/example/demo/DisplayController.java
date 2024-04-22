@@ -25,6 +25,18 @@ public class DisplayController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        try{
+            String[] dataStringArray = DatabaseUtilities.getDataFromTable();
+            assert dataStringArray != null;
+            txt_FirstName.setText(dataStringArray[0]);
+            txt_LastName.setText(dataStringArray[1]);
+            txt_Gender.setText(dataStringArray[2]);
+            txt_Email.setText(dataStringArray[3]);
+            txt_StudentNumber.setText(dataStringArray[4]);
+            txt_FavoriteProgLanguage.setText(dataStringArray[5]);
+            txt_UserName.setText(DatabaseUtilities.getUserNameOfTheLoggedInUser());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
