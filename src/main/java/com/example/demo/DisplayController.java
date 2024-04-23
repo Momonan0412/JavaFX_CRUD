@@ -12,6 +12,8 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.demo.AlertController.showAlert;
+
 public class DisplayController implements Initializable {
     @FXML
     public Text txt_FirstName;
@@ -52,6 +54,7 @@ public class DisplayController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DatabaseUtilities.deleteCurrentLoggedInUser();
+                showAlert("Success!", "Bye bye!");
                 SceneUtilities.changeScene(event, "Login.fxml");
             }
         });

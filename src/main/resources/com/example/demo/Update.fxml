@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -26,7 +27,7 @@
                                 <Font name="Verdana Bold" size="20.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="txtFld_OldPassword" />
+                  <PasswordField fx:id="passTxtFld_OldPassword" />
                   <Button fx:id="btnVerify" mnemonicParsing="false" text="Verify!">
                      <font>
                         <Font name="Forte" size="20.0" />
@@ -43,13 +44,13 @@
                                 <Font name="Verdana Bold" size="20.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="txtFld_NewPassword" />
+                  <PasswordField fx:id="passTxtFld_NewPassword" />
                   <Label prefHeight="17.0" prefWidth="320.0" text="Re-enter New Password">
                      <font>
                         <Font name="Verdana Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFld_ReenterNewPassword" />
+                  <PasswordField fx:id="passTxtFld_ReenterNewPassword" />
                     </children>
                 </VBox>
             </children>

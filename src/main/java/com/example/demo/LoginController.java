@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.demo.AlertController.showAlert;
+
 public class LoginController implements Initializable {
     @FXML
     public TextField txtFld_UserName;
@@ -28,6 +30,7 @@ public class LoginController implements Initializable {
             public void handle(ActionEvent event) {
                 if(DatabaseUtilities.checkIfDataExistInTable(txtFld_UserName.getText(),txtFld_Password.getText())){
                     System.out.println("Success!");
+                    showAlert("Success!", "Data exists in the table.");
                     SceneUtilities.changeScene(event,"Display.fxml");
                 }
             }
