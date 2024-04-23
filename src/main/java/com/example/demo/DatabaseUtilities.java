@@ -28,6 +28,17 @@ public class DatabaseUtilities {
     private static PreparedStatement prepareStatement(String query) throws SQLException {
         return getConnection().prepareStatement(query);
     }
+    public static void updateTableData(String username, String password) {
+        String query = "UPDATE `dbjavacrud`." + DATABASE_CONFIG.tableName()[0] + " SET username =?, password =? WHERE account_id = ?";
+        try (PreparedStatement preparedStatement = prepareStatement(query)){
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, BCrypt.hashpw(password, BCrypt.gensalt()));
+            preparedStatement.setInt(3, DatabaseUtilities.getPrimaryKeyOfTheLoggedInUser());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static String[] getDataFromTable() {
         String query = "SELECT * FROM `dbjavacrud`." + DATABASE_CONFIG.tableName()[1] + " WHERE account_id = ?";
         try (PreparedStatement preparedStatement = prepareStatement(query)){

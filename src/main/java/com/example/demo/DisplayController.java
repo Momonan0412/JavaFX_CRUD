@@ -1,7 +1,10 @@
 package com.example.demo;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -22,9 +25,21 @@ public class DisplayController implements Initializable {
     public Text txt_Gender;
     @FXML
     public Text txt_FavoriteProgLanguage;
+    @FXML
+    public Button btnChangePassword;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setTextValues();
+        btnChangePassword.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SceneUtilities.changeScene(event,"Update.fxml");
+            }
+        });
+    }
+
+    private void setTextValues() {
         try{
             String[] dataStringArray = DatabaseUtilities.getDataFromTable();
             assert dataStringArray != null;

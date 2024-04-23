@@ -100,7 +100,7 @@
          </image>
       </ImageView>
       <AnchorPane layoutX="270.0" layoutY="511.0" prefHeight="37.0" prefWidth="120.0" />
-      <Button layoutX="320.0" layoutY="611.0" mnemonicParsing="false" text="Change Password!">
+      <Button fx:id="btnChangePassword" layoutX="320.0" layoutY="611.0" mnemonicParsing="false" text="Change Password!">
          <font>
             <Font name="Forte" size="20.0" />
          </font>
