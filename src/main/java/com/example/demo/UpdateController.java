@@ -28,8 +28,9 @@ public class UpdateController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setDefaultSettings();
-
-        // Assuming txtFld_NewUsername and txtFld_OldPassword contain current username and password
+        txtFld_NewUsername.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        txtFld_NewPassword.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+        txtFld_ReenterNewPassword.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
         btnVerify.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -43,14 +44,29 @@ public class UpdateController implements Initializable {
                 }
             }
         });
-        if(!txtFld_NewUsername.getText().isEmpty()) {
-            if(txtFld_NewPassword.getText().equals(txtFld_NewPassword.getText())) {
-                btnUpdate.setDisable(false);
-                DatabaseUtilities.updateTableData(txtFld_NewPassword.getText(),txtFld_NewPassword.getText());
+        btnUpdate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(!txtFld_NewUsername.getText().isEmpty()) {
+                    if(txtFld_NewPassword.getText().equals(txtFld_ReenterNewPassword.getText())) {
+                        System.out.println("Successfully entered, before the updateTableData method");
+                        DatabaseUtilities.updateTableData(txtFld_NewPassword.getText(),txtFld_NewPassword.getText());
+                        System.out.println("Successfully entered, after the updateTableData method");
+                        SceneUtilities.changeScene(event, "Login.fxml");
+                    } else {
+                        System.out.println("Error: Failed to enter the new password and the updateTableData method!");
+                    }
+                }
             }
-        }
+        });
     }
 
+    private void updateRegisterButtonState() {
+        boolean disableButton = txtFld_NewPassword.getText().isEmpty() ||
+                txtFld_NewPassword.getText().isEmpty() ||
+                txtFld_NewUsername.getText().isEmpty();
+        btnUpdate.setDisable(disableButton);
+    }
     private void setDefaultSettings() {
         txtFld_NewUsername.setDisable(true);
         txtFld_NewPassword.setDisable(true);

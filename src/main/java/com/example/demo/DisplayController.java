@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -27,14 +29,30 @@ public class DisplayController implements Initializable {
     public Text txt_FavoriteProgLanguage;
     @FXML
     public Button btnChangePassword;
+    public Button btnDeleteYourself;
+    public ImageView imgView_Furina;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setTextValues();
+        imgView_Furina.setImage(new Image("FurinaWut.png"));
+        btnDeleteYourself.setOnMouseExited(event -> {
+            imgView_Furina.setImage(new Image("FurinaWut.png"));
+        });
+        btnDeleteYourself.setOnMouseEntered(event -> {
+            imgView_Furina.setImage(new Image("Furina.gif"));
+        });
         btnChangePassword.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 SceneUtilities.changeScene(event,"Update.fxml");
+            }
+        });
+        btnDeleteYourself.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DatabaseUtilities.deleteCurrentLoggedInUser();
+                SceneUtilities.changeScene(event, "Login.fxml");
             }
         });
     }

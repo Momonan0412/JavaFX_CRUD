@@ -29,7 +29,8 @@ public class DatabaseUtilities {
         return getConnection().prepareStatement(query);
     }
     public static void updateTableData(String username, String password) {
-        String query = "UPDATE `dbjavacrud`." + DATABASE_CONFIG.tableName()[0] + " SET username =?, password =? WHERE account_id = ?";
+        String query = "UPDATE `dbjavacrud`." +
+                DATABASE_CONFIG.tableName()[0] + " SET username = ?, password = ? WHERE account_id = ?";
         try (PreparedStatement preparedStatement = prepareStatement(query)){
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, BCrypt.hashpw(password, BCrypt.gensalt()));
@@ -120,21 +121,15 @@ public class DatabaseUtilities {
             return false;
         }
     }
-    public static Boolean deleteDataFromTable(String account_id) {
-        String query = "DELETE " +
-                "FROM " + DATABASE_CONFIG.tableName()[0] + " " +
-                "JOIN " + DATABASE_CONFIG.tableName()[1] + " ON " +
-                DATABASE_CONFIG.tableName()[0] + ".account_id  = "+ DATABASE_CONFIG.tableName()[1] +".accountID" +
-                "WHERE " + DATABASE_CONFIG.tableName()[0] + ".account_id  = ? OR"+ DATABASE_CONFIG.tableName()[1] +".accountID = ?" +
-                "RETURNING *";
-        try (
-             PreparedStatement preparedStatement = prepareStatement(query)) {
-            preparedStatement.setString(1, account_id);
-            preparedStatement.setString(2, account_id);
-            return preparedStatement.executeQuery().isBeforeFirst();
+    public static void deleteCurrentLoggedInUser() {
+        // DATABASE_CONFIG.tableName()[1] Contains foreign key that is "ON DELETE CASCADE"
+        // Which deletes all with the Foreign key of "primaryKeyOfTheLoggedInUser"
+        String query = "DELETE FROM " + DATABASE_CONFIG.tableName()[0] + " WHERE account_id = ?";
+        try (PreparedStatement preparedStatement = prepareStatement(query)){
+            preparedStatement.setInt(1, getPrimaryKeyOfTheLoggedInUser());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException(e);
         }
     }
     public static void createTable(){
@@ -156,7 +151,8 @@ public class DatabaseUtilities {
                     "`student_id` VARCHAR(255) NOT NULL," +
                     "`prog_languages` VARCHAR(255) NOT NULL," +
                     "PRIMARY KEY (`profile_id`)," +
-                    "FOREIGN KEY (`account_id`) REFERENCES " + DATABASE_CONFIG.tableName()[0] + "(`account_id`)" +
+                    "FOREIGN KEY (`account_id`) REFERENCES " + DATABASE_CONFIG.tableName()[0] + "(`account_id`) " +
+                    "ON DELETE CASCADE" +
             ") ENGINE = InnoDB;";
             statement.executeUpdate(queryTwo);
         } catch (SQLException e) {

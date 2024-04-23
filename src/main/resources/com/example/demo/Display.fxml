@@ -94,13 +94,14 @@
             <Image url="@../../../Bubbles.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="475.0" layoutY="463.0">
-         <image>
-            <Image url="@../../../FurinaWut.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imgView_Furina" fitHeight="200.0" fitWidth="200.0" layoutX="475.0" layoutY="463.0" />
       <AnchorPane layoutX="270.0" layoutY="511.0" prefHeight="37.0" prefWidth="120.0" />
       <Button fx:id="btnChangePassword" layoutX="320.0" layoutY="611.0" mnemonicParsing="false" text="Change Password!">
+         <font>
+            <Font name="Forte" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDeleteYourself" layoutX="56.0" layoutY="611.0" mnemonicParsing="false" text="Delete Yourself!">
          <font>
             <Font name="Forte" size="20.0" />
          </font>
