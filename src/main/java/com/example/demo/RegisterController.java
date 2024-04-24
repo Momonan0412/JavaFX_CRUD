@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -42,6 +43,7 @@ public class RegisterController implements Initializable {
     public PasswordField txtFld_Password;
     @FXML
     public ImageView ImageViewAlert;
+    public Button btnExit;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +59,19 @@ public class RegisterController implements Initializable {
         rBtn_Others.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
         rBtn_Male.selectedProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
 
+//        ImageViewAlert.setImage(new Image("Please-fill-in-all-required-fields.gif"));
+//        btn_Register.setOnMouseExited(event -> {
+//            ImageViewAlert.setVisible(false);
+//        });
+//        btn_Register.setOnMouseExited(event -> {
+//            ImageViewAlert.setVisible(true);
+//        });
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
         btn_AccountExistProceedToLoginScene.setOnAction(event -> SceneUtilities.changeScene(event, "Login.fxml"));
         btn_Register.setOnAction(new EventHandler<ActionEvent>() {
             @Override

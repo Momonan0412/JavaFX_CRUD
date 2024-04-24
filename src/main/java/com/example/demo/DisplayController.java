@@ -33,6 +33,7 @@ public class DisplayController implements Initializable {
     public Button btnChangePassword;
     public Button btnDeleteYourself;
     public ImageView imgView_Furina;
+    public Button btnExit;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +44,12 @@ public class DisplayController implements Initializable {
         });
         btnDeleteYourself.setOnMouseEntered(event -> {
             imgView_Furina.setImage(new Image("Furina.gif"));
+        });
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
         });
         btnChangePassword.setOnAction(new EventHandler<ActionEvent>() {
             @Override

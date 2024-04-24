@@ -29,6 +29,7 @@ public class UpdateController implements Initializable {
     @FXML
     public PasswordField passTxtFld_ReenterNewPassword;
     public Button btnBack;
+    public Button btnExit;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -36,6 +37,13 @@ public class UpdateController implements Initializable {
         txtFld_NewUsername.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
         passTxtFld_NewPassword.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
         passTxtFld_ReenterNewPassword.textProperty().addListener((observable, oldValue, newValue) -> updateRegisterButtonState());
+
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
         btnBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

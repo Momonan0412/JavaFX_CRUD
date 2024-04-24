@@ -106,5 +106,10 @@
             <Font name="Forte" size="20.0" />
          </font>
       </Button>
+      <Button fx:id="btnExit" alignment="CENTER" layoutX="614.0" mnemonicParsing="false" style="-fx-background-radius: 30px;" text="X">
+         <font>
+            <Font name="Book Antiqua Bold" size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

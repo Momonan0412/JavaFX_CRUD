@@ -27,5 +27,10 @@
       </Text>
       <Button fx:id="btn_Login" layoutX="135.0" layoutY="219.0" mnemonicParsing="false" text="Login" />
       <Button fx:id="btn_CreateAccount" layoutX="110.0" layoutY="255.0" mnemonicParsing="false" text="Create Account" />
+      <Button fx:id="btnExit" alignment="CENTER" layoutX="259.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-radius: 30px;" text="X">
+         <font>
+            <Font name="Book Antiqua Bold" size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

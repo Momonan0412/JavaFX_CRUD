@@ -22,9 +22,17 @@ public class LoginController implements Initializable {
     public Button btn_Login;
     @FXML
     public Button btn_CreateAccount;
+    public Button btnExit;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
         btn_Login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
