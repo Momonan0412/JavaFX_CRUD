@@ -71,5 +71,10 @@
             <Image url="@../../../FurinaShock.gif" />
          </image>
       </ImageView>
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="611.0" mnemonicParsing="false" text="Back!">
+         <font>
+            <Font name="Forte" size="20.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
